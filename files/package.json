@@ -1,0 +1,73 @@
+{
+  "name": "datasweb",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.22.1"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "verify": "npm run typecheck && npm run lint && npm run test:coverage && npm run test:database && npm run build",
+    "migrate:love-data": "tsx scripts/migrate-love-data-to-normalized-schema.ts",
+    "seed:demo": "tsx scripts/seed-demo-data.ts",
+    "test:gift-cycle-loop": "tsx scripts/test-gift-cycle-approval-loop.ts",
+    "postinstall": "node scripts/install-hooks.mjs",
+    "test:database": "node scripts/test-database.mjs"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": "eslint --fix --max-warnings=0"
+  },
+  "overrides": {
+    "postcss": "^8.5.18",
+    "sharp": "^0.35.0"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.110.0",
+    "bcryptjs": "^2.4.3",
+    "framer-motion": "^12.42.2",
+    "jose": "^5.9.6",
+    "lucide-react": "^1.23.0",
+    "next": "16.2.12",
+    "posthog-js": "^1.413.3",
+    "posthog-node": "^5.48.1",
+    "razorpay": "^2.9.8",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.8",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.0.3",
+    "@vitest/coverage-v8": "^4.1.10",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.12",
+    "jsdom": "^25.0.1",
+    "lint-staged": "^17.0.8",
+    "msw": "^2.15.0",
+    "simple-git-hooks": "^2.13.1",
+    "tailwindcss": "^4",
+    "tsx": "^4.19.2",
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.10"
+  }
+}
