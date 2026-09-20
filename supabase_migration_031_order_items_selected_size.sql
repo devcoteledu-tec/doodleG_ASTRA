@@ -1,0 +1,13 @@
+-- Migration 031: Size selection actually reaches the order
+-- ---------------------------------------------------------------------------
+-- Run this against your existing database. Safe to re-run.
+--
+-- Context: order_items.selected_color has existed and worked end-to-end
+-- since day one, but the equivalent for size was never built — the product
+-- page had a `selectedSize` state variable and even a CartItem.selectedSize
+-- TS field, but the Select Size buttons had no onClick, addItem() never
+-- passed selectedSize, and no column existed here to store it even if it
+-- had. This adds the missing column so a size chosen on the product page
+-- can actually flow through checkout to the provider. Nullable — most
+-- products (anything without a `sizes` list) never set it.
+ALTER TABLE public.order_items ADD COLUMN IF NOT EXISTS selected_size TEXT;

@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+/* ─── LIGHT THEME TOKENS ─────────────────────────────────────── */
+:root {
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Outfit', sans-serif;
+
+  --background:        #ffffff;
+  --foreground:        #0a0a0a;
+  --card:              rgba(255, 255, 255, 0.95);
+  --card-foreground:   #0a0a0a;
+  --border:            rgba(0, 0, 0, 0.09);
+  --ring:              #0a0a0a;
+
+  /* ACCENT: was luxury-gold (#d4af37), now BLACK */
+  --luxury-gold:       #0a0a0a;
+  --luxury-gold-rgb:   10, 10, 10;
+  --sunset-coral:      #e85d4a;
+  --emerald-accent:    #059669;
+  --muted:             #6b7280;
+  --muted-foreground:  #6b7280;
+}
+
+@theme {
+  --font-display:              var(--font-display);
+  --font-sans:                 var(--font-sans);
+  --color-luxury-gold:         var(--luxury-gold);       /* BLACK */
+  --color-sunset-coral:        var(--sunset-coral);
+  --color-emerald-accent:      var(--emerald-accent);
+  --color-midnight:            #ffffff;                  /* was #070a13 */
+  --color-charcoal:            #f5f5f5;                  /* was #0f1423 → used as surface */
+  --color-border-custom:       var(--border);
+}
+
+/* ─── BODY ────────────────────────────────────────────────────── */
+body {
+  background-color: var(--background);
+  color:            var(--foreground);
+  font-family:      var(--font-sans);
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(0, 0, 0, 0.02) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(232, 93, 74, 0.03) 0%, transparent 40%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── GLASSMORPHISM (light) ───────────────────────────────────── */
+.glass-panel {
+  background:    rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  border:        1px solid rgba(0, 0, 0, 0.07);
+  box-shadow:    0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.glass-panel-premium {
+  background:    linear-gradient(135deg, rgba(255,255,255,0.97) 0%, rgba(248,248,248,0.99) 100%);
+  backdrop-filter: blur(18px);
+  border:        1px solid rgba(0, 0, 0, 0.12);
+  box-shadow:    0 8px 40px rgba(0, 0, 0, 0.10);
+}
+
+/* ─── GRADIENT TEXTS ─────────────────────────────────────────── */
+.gold-gradient-text {                           /* now a black gradient */
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 55%, #2a2a2a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.coral-gradient-text {
+  background: linear-gradient(135deg, #e85d4a 0%, #ff9a8b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── PROVIDERS PAGE: sky-blue → sunset-orange ─────────────────── */
+/* Palette pulled from the three reference images: a solid sky blue, a
+   warm amber/orange, and a blue-to-peach sunset gradient. Used on the
+   /profiles (providers) directory hero + accents. */
+.provider-sunset-gradient {
+  background: linear-gradient(135deg, #2f8fd6 0%, #6bb6e8 35%, #f5a94e 75%, #f78c3c 100%);
+}
+
+.provider-sunset-gradient-text {
+  background: linear-gradient(135deg, #2f8fd6 0%, #f5a94e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.follow-btn-gradient {
+  background: linear-gradient(135deg, #2f8fd6 0%, #f5a94e 100%);
+}
+
+/* ─── PRODUCT CARD HOVER ─────────────────────────────────────── */
+.product-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.10);
+}
+.product-card:hover .product-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+.product-actions {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.25s ease;
+}
+
+/* ─── RANGE SLIDER (black accent) ───────────────────────────── */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  outline: none;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0a0a0a;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.15), 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ─── STAR RATING ────────────────────────────────────────────── */
+.star-filled { color: #0a0a0a; }
+.star-empty  { color: rgba(0,0,0,0.12); }
+
+/* ─── FLASH BADGE PULSE ──────────────────────────────────────── */
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.65; }
+}
+.badge-pulse { animation: badge-pulse 2s ease-in-out infinite; }
+
+/* ─── HERO SEARCH FOCUS GLOW ─────────────────────────────────── */
+.search-focus:focus-within {
+  box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.35);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ─── SKELETON SHIMMER ───────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #f3f3f3 25%, #eaeaea 50%, #f3f3f3 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ─── SCROLLBAR (light) ──────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; }
+::-webkit-scrollbar-track  { background: #f5f5f5; }
+::-webkit-scrollbar-thumb  { background: rgba(0,0,0,0.18); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
+
+/* ─── HIDE SCROLLBAR (horizontal carousels) ─────────────────── */
+.no-scrollbar {
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE / old Edge */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;              /* Chrome / Safari */
+}
+
+/* ─── HERO AUTO-SCROLL TEXT ADS (ads_auto_scroll.text_content) ──
+   Bold headline continuously animates left-to-right across its
+   colored panel. Built from two back-to-back copies of the same
+   text (marquee-text-inner) so the loop has no visible seam — see
+   the comment in HomeMobileFeed.tsx for why the animation runs
+   -50% -> 0% rather than the more common 0% -> -50%. ──────────── */
+@keyframes marquee-ltr {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0%); }
+}
+.marquee-text {
+  display: inline-flex;
+  animation: marquee-ltr 14s linear infinite;
+}
+.marquee-text-inner {
+  padding-right: 4rem;
+  color: transparent;
+  -webkit-text-stroke: 3px rgba(255, 255, 255, 0.7);
+  text-stroke: 3px rgba(255, 255, 255, 0.7);
+}

@@ -1,5 +1,7 @@
 # Apply this upgrade manually
 
+**GitHub repository users:** The application files are already installed at the repository root. Skip steps 1–2 about copying the patch archive; keep a backup and follow steps 3–7 for the database, environment and staging checks. The instructions about `files/` below apply only to the downloadable manual patch ZIP.
+
 The patch ZIP contains complete replacement files under `files/`, preserving their exact project-relative paths. `CHANGE_MANIFEST.csv` lists every add/replace/delete and SHA-256 checksum. `CHANGES.md` lists paths in readable form. The full-source ZIP is an alternative starting point; it contains the same upgraded project without dependencies, build output or secrets.
 
 ## 1. Preserve your current installation

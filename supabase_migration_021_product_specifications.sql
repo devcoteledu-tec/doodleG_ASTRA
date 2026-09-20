@@ -1,0 +1,14 @@
+-- Migration 021: Product specifications
+-- ---------------------------------------------------------------------------
+-- Safe to re-run. Adds a free-form key/value spec sheet per product (e.g.
+-- {"Material": "Stainless Steel", "Dimensions": "13x23 inch"}), rendered as
+-- a table on the product detail page. NOT NULL with a constant default —
+-- Postgres 11+ backfills this as a metadata-only operation, no table rewrite.
+--
+-- IMPORTANT: /api/products and /api/products/[id] read from the
+-- `active_products_box` VIEW, which is applied directly in Supabase and is
+-- NOT in this repo. If that view lists columns explicitly (rather than
+-- `SELECT *`), this new column won't be visible through it until the view
+-- is updated too — run this first to check, then update the view if needed:
+--   SELECT pg_get_viewdef('active_products_box'::regclass, true);
+ALTER TABLE products_box ADD COLUMN IF NOT EXISTS specifications JSONB NOT NULL DEFAULT '{}'::jsonb;
