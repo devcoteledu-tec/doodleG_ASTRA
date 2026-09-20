@@ -6,7 +6,9 @@ Use Node 24. Build with `npm run build`; start with `npm start` on a Node host. 
 
 Configure Razorpay to send signed `payment.captured` and/or `order.paid` events to `https://YOUR_DOMAIN/api/razorpay/webhook`, using `RAZORPAY_WEBHOOK_SECRET`. The route validates the raw-body HMAC then re-fetches the payment. Invalid signatures fail; transient processing failures return 503 so delivery can retry. Do not use the API key secret as a substitute for the configured webhook secret.
 
-`GET /api/cron/payments` reconciles up to five pending attempts per run, oldest checked first. Both cron endpoints require `Authorization: Bearer <CRON_SECRET>`. `vercel.json` requests a 15-minute schedule; verify that your host/plan supports this frequency. Otherwise use an external scheduler that supplies that header. Do not disable authentication to accommodate a scheduler.
+`GET /api/cron/payments` reconciles up to five pending attempts per run, oldest checked first. Both cron endpoints require `Authorization: Bearer <CRON_SECRET>`. `vercel.json` uses daily schedules compatible with Vercel Hobby: gift dispatch at `0 0 * * *` and payment reconciliation at `30 0 * * *` (UTC; Hobby execution can occur within the scheduled hour). The prior 15-minute schedules caused Vercel to reject deployment. See https://vercel.com/docs/cron-jobs/usage-and-pricing.
+
+Daily reconciliation processes at most five attempts per day; it is a low-volume fallback, not real-time recovery. Keep the signed Razorpay webhook configured and use `/checkout/recover` for customer-initiated checks. For a larger backlog or more frequent gift processing, use an external authenticated scheduler or a hosting plan supporting the required frequency. Do not disable authentication to accommodate a scheduler.
 
 Useful operator query (run privately with administrative access):
 
