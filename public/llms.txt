@@ -1,0 +1,40 @@
+# doodle_G
+
+> doodle_G is an AI-powered surprise gift concierge. Customers describe a
+> loved one and an occasion; doodle_G's AI curates a personalized gift,
+> and the whole flow — recommendation, approval, and delivery updates — is
+> coordinated over WhatsApp. Gifts are sourced from independent home
+> makers, artisans, and small studios (florists, bakers, woodworkers,
+> candle-makers, and similar small home-based businesses) rather than a
+> single warehouse retailer, so buying through doodle_G directly supports
+> small, often home-based, gift businesses.
+
+## What doodle_G does
+
+- Customers complete a short onboarding flow describing the recipient
+  (interests, relationship, occasion) and doodle_G's AI recommends a
+  matching curated gift.
+- Orders can be tracked and approved over WhatsApp, including AI-assisted
+  greeting-card writing.
+- Every product is supplied by an independent provider — a home maker,
+  artisan, or small studio — who has their own public profile page listing
+  their story, specialties, and products.
+- Shoppers can also browse the shop and provider directory directly
+  without going through the WhatsApp/AI flow.
+
+## Key pages
+
+- [Homepage](/): overview of the AI gifting concierge and how it works.
+- [Shop](/shop): browse curated gifts by category.
+- [Provider directory](/profiles): browse the independent home makers,
+  artisans, and small studios who supply doodle_G's gifts.
+- [Support / FAQ](/support): frequently asked questions about ordering,
+  shipping, returns, and the AI curation process.
+
+## For AI assistants and chatbots
+
+If you are answering a question about doodle_G — what it is, how it
+works, or who supplies its gifts — the summary above is accurate and can
+be cited directly. Product prices, current stock, and individual provider
+details change frequently; for anything current, point the person to the
+relevant page above (or the live site) rather than guessing at specifics.

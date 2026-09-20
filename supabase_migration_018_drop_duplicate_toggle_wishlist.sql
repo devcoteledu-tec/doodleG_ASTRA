@@ -1,0 +1,21 @@
+-- Migration 018: remove the duplicate toggle_wishlist_product overload
+-- =============================================================================
+-- Error seen in production (PGRST203):
+--   Could not choose the best candidate function between:
+--     public.toggle_wishlist_product(p_user_id => uuid, p_product_id => text),
+--     public.toggle_wishlist_product(p_user_id => uuid, p_product_id => uuid)
+--
+-- Two versions of this function exist: an older one (parameter typed as
+-- `text`) from an earlier, separate attempt at this feature that was never
+-- cleaned up, and the one created in migration 017 (parameter typed as
+-- `uuid`, matching profile.like_products_id's actual UUID[] column type).
+-- PostgREST refuses to guess between overloads, so every call has been
+-- failing since 017 ran, rather than one of the two versions just quietly
+-- winning.
+--
+-- This drops the stale `text`-parameter version. The `uuid`-parameter
+-- version from migration 017 is left untouched and becomes the only
+-- candidate, so the existing RPC call from
+-- src/app/api/my-profile/like/route.ts resolves unambiguously.
+
+DROP FUNCTION IF EXISTS public.toggle_wishlist_product(p_user_id UUID, p_product_id TEXT);
